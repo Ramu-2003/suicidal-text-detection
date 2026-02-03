@@ -1,15 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-from backend.model_pipeline import train_models, load_models
-
+from backend.model_pipeline import load_models
 
 app = Flask(__name__)
 CORS(app)
 
-# Train models on startup
-print("Training models...")
-model_info = train_models()
+# DO NOT TRAIN ON RENDER — Only load models
 print("Loading models...")
 models = load_models()
 print(f"Available models: {list(models.keys())}")
@@ -17,7 +14,6 @@ print(f"Available models: {list(models.keys())}")
 
 @app.route("/models", methods=["GET"])
 def get_models():
-    """Return available models and their accuracy"""
     result = {}
     for name, data in models.items():
         result[name] = {"accuracy": round(data['accuracy'], 2)}
@@ -26,7 +22,6 @@ def get_models():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    """Predict suicidal text"""
     data = request.get_json()
     text = data.get("text")
     model_name = data.get("model")
@@ -35,7 +30,7 @@ def predict():
         return jsonify({"error": "Text and model are required"}), 400
 
     if model_name not in models:
-        return jsonify({"error": "Model not found or disabled due to low accuracy"}), 400
+        return jsonify({"error": "Model not found"}), 400
 
     model_data = models[model_name]
     vectorizer = model_data["vectorizer"]
@@ -52,10 +47,10 @@ def predict():
         "prediction": label,
         "model_used": model_name,
         "accuracy": round(accuracy, 2),
-        "confidence": round(confidence*100, 2)
+        "confidence": round(confidence * 100, 2)
     })
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
