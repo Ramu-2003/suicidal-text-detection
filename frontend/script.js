@@ -72,7 +72,7 @@ predictBtn.addEventListener('click', async () => {
   resultDiv.className = 'mt-8 p-6 rounded-xl min-h-[120px] text-center text-xl font-medium bg-slate-100';
 
   try {
-    const res = await fetch('http://localhost:5000/predict', {
+    const res = await fetch('https://suicidal-text-detection.onrender.com/predict', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text, model })
