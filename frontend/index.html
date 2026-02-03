@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Suicidal Ideation Detection Prototype</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <div class="text-xl md:text-2xl font-bold tracking-tight text-slate-900">DetectText</div>
+        <nav class="hidden md:flex items-center space-x-10">
+          <a href="#" data-section="home" class="text-slate-700 hover:text-slate-900 font-medium transition">Home</a>
+          <a href="#" data-section="about" class="text-slate-700 hover:text-slate-900 font-medium transition">About</a>
+          <a href="#" data-section="dataset" class="text-slate-700 hover:text-slate-900 font-medium transition">Dataset</a>
+          <a href="#" data-section="prototype" class="text-slate-700 hover:text-slate-900 font-medium transition">Prototype</a>
+        </nav>
+        <button class="md:hidden hamburger flex flex-col space-y-1.5">
+          <span class="w-6 h-0.5 bg-slate-700 rounded"></span>
+          <span class="w-6 h-0.5 bg-slate-700 rounded"></span>
+          <span class="w-6 h-0.5 bg-slate-700 rounded"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu hidden md:hidden fixed inset-0 bg-white z-40 pt-20">
+    <nav class="flex flex-col items-center space-y-8 text-lg font-medium">
+      <a href="#" data-section="home" class="text-slate-800 hover:text-slate-600">Home</a>
+      <a href="#" data-section="about" class="text-slate-800 hover:text-slate-600">About</a>
+      <a href="#" data-section="dataset" class="text-slate-800 hover:text-slate-600">Dataset</a>
+      <a href="#" data-section="prototype" class="text-slate-800 hover:text-slate-600">Prototype</a>
+    </nav>
+  </div>
+
+  <!-- Back button -->
+  <button id="backBtn" class="fixed top-20 left-6 z-40 hidden items-center px-5 py-2.5 bg-slate-900 text-white rounded-lg shadow-lg hover:bg-slate-800 transition md:left-8">
+    <i class="fas fa-arrow-left mr-2 text-sm"></i> Back
+  </button>
+
+  <!-- Main content -->
+  <main class="pt-24 md:pt-28">
+
+    <!-- Home / Hero -->
+    <section id="home" class="page-section active min-h-screen flex items-center bg-gradient-to-b from-white to-slate-50">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6">Suicidal Ideation Detection Prototype</h1>
+        <p class="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto mb-10">Research-grade NLP tool for identifying potential linguistic risk markers in text — strictly academic/experimental.</p>
+        <p class="text-base text-slate-500 mb-12">Not for clinical use • High false positive/negative risk possible</p>
+        <a href="#" data-section="prototype" class="inline-flex items-center px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition shadow-md hover:shadow-lg">Launch Prototype</a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="page-section py-24 md:py-32 bg-white">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">Project Overview</h2>
+        <div class="prose prose-slate lg:prose-lg mx-auto">
+          <p>This prototype explores classical ML approaches (TF-IDF + Logistic Regression) for detecting suicidal ideation signals in Portuguese text, using the Boamente dataset as benchmark.</p>
+          <p>Future iterations aim to integrate transformer-based models (e.g. BERT variants) for improved performance.</p>
+          <p class="font-medium mt-8">Important: This is <strong>not</strong> a validated diagnostic instrument. Predictions are experimental and should never replace professional mental health support.</p>
+          <div class="mt-10 p-6 bg-rose-50 border-l-4 border-rose-400 rounded-xl">
+            <p class="font-semibold text-rose-800 mb-2">If you or someone is in crisis:</p>
+            <ul class="space-y-2 text-rose-900">
+              <li>India: Vandrevala Foundation — 9999 666 555 | AASRA — 9820466726</li>
+              <li>Global: <a href="https://findahelpline.com" target="_blank" class="underline hover:text-rose-700">findahelpline.com</a></li>
+              <li>Emergency: 112 or local services</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dataset -->
+    <section id="dataset" class="page-section py-24 md:py-32 bg-slate-50">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">Boamente Dataset</h2>
+        <div class="grid md:grid-cols-2 gap-10">
+          <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <h3 class="text-xl font-semibold mb-4">Purpose & Structure</h3>
+            <p>Binary classification dataset from real Portuguese social media messages, manually annotated.</p>
+            <p class="mt-4">Core columns: <code>id</code>, <code>text</code>, <code>target</code> (0 = non-suicidal, 1 = suicidal)</p>
+          </div>
+          <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <h3 class="text-xl font-semibold mb-4">Scale & Imbalance</h3>
+            <ul class="space-y-3">
+              <li><span class="font-bold text-slate-900">~15,000–20,000</span> non-suicidal entries</li>
+              <li><span class="font-bold text-slate-900">~1,500–3,000</span> suicidal entries</li>
+            </ul>
+            <p class="mt-6 text-slate-600">Significant imbalance → Recall & F1 prioritized over raw accuracy.</p>
+          </div>
+        </div>
+        <div class="mt-12 bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+          <h3 class="text-xl font-semibold mb-4">Modeling Notes</h3>
+          <ul class="space-y-3 list-disc pl-5 text-slate-700">
+            <li>Preprocessing: remove URLs/emojis, normalization, tokenization</li>
+            <li>Current baseline: TF-IDF + Logistic Regression</li>
+            <li>Threshold: models ≥85% validation accuracy only</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prototype -->
+    <section id="prototype" class="page-section py-24 md:py-32 bg-white">
+      <div class="max-w-3xl mx-auto px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 text-center">Prototype Analysis</h2>
+        <p class="text-lg text-slate-600 text-center mb-12">Enter text to evaluate using high-accuracy models only.</p>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 shadow-sm">
+          <textarea id="textInput" rows="6" placeholder="Paste or write text here..." class="w-full px-5 py-4 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent resize-y text-lg"></textarea>
+
+          <div class="mt-6 flex flex-col sm:flex-row gap-4">
+            <select id="modelSelect" class="flex-1 px-5 py-4 bg-white border border-slate-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-slate-400"></select>
+            <button id="predictBtn" class="px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition shadow-md">Analyze Text</button>
+          </div>
+
+          <div id="result" class="mt-8 p-6 rounded-xl min-h-[120px] text-center text-xl font-medium transition-all duration-300"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-300 py-16 text-center">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-lg">Research Prototype </p>
+      <p class="mt-3 text-slate-400">Experimental academic tool </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
