@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-from model_pipeline import train_models, load_models
+from backend.model_pipeline import train_models, load_models
+
 
 app = Flask(__name__)
 CORS(app)
